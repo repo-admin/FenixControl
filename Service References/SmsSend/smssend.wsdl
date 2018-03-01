@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Webová služba pro odesílání SMS přes MobileChange.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SendNotification">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNumbers" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendNotificationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendNotificationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendNotificationFromSender">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNumbers" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sender" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendNotificationFromSenderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendNotificationFromSenderResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNumbers" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="accountNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sender" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="senderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="onTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendMessageResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SendNotificationSoapIn">
+    <wsdl:part name="parameters" element="tns:SendNotification" />
+  </wsdl:message>
+  <wsdl:message name="SendNotificationSoapOut">
+    <wsdl:part name="parameters" element="tns:SendNotificationResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendNotificationFromSenderSoapIn">
+    <wsdl:part name="parameters" element="tns:SendNotificationFromSender" />
+  </wsdl:message>
+  <wsdl:message name="SendNotificationFromSenderSoapOut">
+    <wsdl:part name="parameters" element="tns:SendNotificationFromSenderResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:SendMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendNotificationHttpGetIn">
+    <wsdl:part name="phoneNumbers" type="s:string" />
+    <wsdl:part name="data" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendNotificationHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendNotificationFromSenderHttpGetIn">
+    <wsdl:part name="phoneNumbers" type="s:string" />
+    <wsdl:part name="data" type="s:string" />
+    <wsdl:part name="sender" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendNotificationFromSenderHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageHttpGetIn">
+    <wsdl:part name="phoneNumbers" type="s:string" />
+    <wsdl:part name="accountNumber" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="sender" type="s:string" />
+    <wsdl:part name="senderId" type="s:string" />
+    <wsdl:part name="onTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="SendNotificationHttpPostIn">
+    <wsdl:part name="phoneNumbers" type="s:string" />
+    <wsdl:part name="data" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendNotificationHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendNotificationFromSenderHttpPostIn">
+    <wsdl:part name="phoneNumbers" type="s:string" />
+    <wsdl:part name="data" type="s:string" />
+    <wsdl:part name="sender" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendNotificationFromSenderHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageHttpPostIn">
+    <wsdl:part name="phoneNumbers" type="s:string" />
+    <wsdl:part name="accountNumber" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="sender" type="s:string" />
+    <wsdl:part name="senderId" type="s:string" />
+    <wsdl:part name="onTime" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SendMessageHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:portType name="SmsSendSoap">
+    <wsdl:operation name="SendNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Odeslání SMS zprávy.</wsdl:documentation>
+      <wsdl:input message="tns:SendNotificationSoapIn" />
+      <wsdl:output message="tns:SendNotificationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendNotificationFromSender">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Odeslání SMS zprávy.</wsdl:documentation>
+      <wsdl:input message="tns:SendNotificationFromSenderSoapIn" />
+      <wsdl:output message="tns:SendNotificationFromSenderSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Odeslání SMS zprávy s případným uložením do EA (je-li zadáno accountNumber) a naplánovaným časem (je-li zadáno onTime).</wsdl:documentation>
+      <wsdl:input message="tns:SendMessageSoapIn" />
+      <wsdl:output message="tns:SendMessageSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SmsSendHttpGet">
+    <wsdl:operation name="SendNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Odeslání SMS zprávy.</wsdl:documentation>
+      <wsdl:input message="tns:SendNotificationHttpGetIn" />
+      <wsdl:output message="tns:SendNotificationHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendNotificationFromSender">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Odeslání SMS zprávy.</wsdl:documentation>
+      <wsdl:input message="tns:SendNotificationFromSenderHttpGetIn" />
+      <wsdl:output message="tns:SendNotificationFromSenderHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Odeslání SMS zprávy s případným uložením do EA (je-li zadáno accountNumber) a naplánovaným časem (je-li zadáno onTime).</wsdl:documentation>
+      <wsdl:input message="tns:SendMessageHttpGetIn" />
+      <wsdl:output message="tns:SendMessageHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="SmsSendHttpPost">
+    <wsdl:operation name="SendNotification">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Odeslání SMS zprávy.</wsdl:documentation>
+      <wsdl:input message="tns:SendNotificationHttpPostIn" />
+      <wsdl:output message="tns:SendNotificationHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendNotificationFromSender">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Odeslání SMS zprávy.</wsdl:documentation>
+      <wsdl:input message="tns:SendNotificationFromSenderHttpPostIn" />
+      <wsdl:output message="tns:SendNotificationFromSenderHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Odeslání SMS zprávy s případným uložením do EA (je-li zadáno accountNumber) a naplánovaným časem (je-li zadáno onTime).</wsdl:documentation>
+      <wsdl:input message="tns:SendMessageHttpPostIn" />
+      <wsdl:output message="tns:SendMessageHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SmsSendSoap" type="tns:SmsSendSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendNotification">
+      <soap:operation soapAction="http://tempuri.org/SendNotification" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendNotificationFromSender">
+      <soap:operation soapAction="http://tempuri.org/SendNotificationFromSender" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap:operation soapAction="http://tempuri.org/SendMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SmsSendSoap12" type="tns:SmsSendSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendNotification">
+      <soap12:operation soapAction="http://tempuri.org/SendNotification" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendNotificationFromSender">
+      <soap12:operation soapAction="http://tempuri.org/SendNotificationFromSender" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap12:operation soapAction="http://tempuri.org/SendMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SmsSendHttpGet" type="tns:SmsSendHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SendNotification">
+      <http:operation location="/SendNotification" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendNotificationFromSender">
+      <http:operation location="/SendNotificationFromSender" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <http:operation location="/SendMessage" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SmsSendHttpPost" type="tns:SmsSendHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SendNotification">
+      <http:operation location="/SendNotification" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendNotificationFromSender">
+      <http:operation location="/SendNotificationFromSender" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <http:operation location="/SendMessage" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SmsSend">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Webová služba pro odesílání SMS přes MobileChange.</wsdl:documentation>
+    <wsdl:port name="SmsSendSoap" binding="tns:SmsSendSoap">
+      <soap:address location="http://smssendsvc/smssend.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SmsSendSoap12" binding="tns:SmsSendSoap12">
+      <soap12:address location="http://smssendsvc/smssend.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SmsSendHttpGet" binding="tns:SmsSendHttpGet">
+      <http:address location="http://smssendsvc/smssend.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SmsSendHttpPost" binding="tns:SmsSendHttpPost">
+      <http:address location="http://smssendsvc/smssend.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

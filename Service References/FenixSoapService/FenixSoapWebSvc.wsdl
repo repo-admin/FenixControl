@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.upc.cz/fenixSoapWS" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.upc.cz/fenixSoapWS" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.upc.cz/fenixSoapWS">
+      <s:element name="TSubmitDataToProcessing">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TSubmitDataToProcessingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TSubmitDataToProcessingResult" type="tns:SimpleResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SimpleResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Number" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SubmitDataToProcessing">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="login" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="partnerCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="messageType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="data" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="encoding" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SubmitDataToProcessingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SubmitDataToProcessingResult" type="tns:SubmitDataToProcessingResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SubmitDataToProcessingResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Errors" type="tns:ArrayOfErrors" />
+          <s:element minOccurs="1" maxOccurs="1" name="MessageNumber" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageDescription" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfErrors">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Errors" nillable="true" type="tns:Errors" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Errors">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TSubmitDataToProcessingSoapIn">
+    <wsdl:part name="parameters" element="tns:TSubmitDataToProcessing" />
+  </wsdl:message>
+  <wsdl:message name="TSubmitDataToProcessingSoapOut">
+    <wsdl:part name="parameters" element="tns:TSubmitDataToProcessingResponse" />
+  </wsdl:message>
+  <wsdl:message name="SubmitDataToProcessingSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitDataToProcessing" />
+  </wsdl:message>
+  <wsdl:message name="SubmitDataToProcessingSoapOut">
+    <wsdl:part name="parameters" element="tns:SubmitDataToProcessingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="FenixSoapWebSvcSoap">
+    <wsdl:operation name="TSubmitDataToProcessing">
+      <wsdl:input message="tns:TSubmitDataToProcessingSoapIn" />
+      <wsdl:output message="tns:TSubmitDataToProcessingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitDataToProcessing">
+      <wsdl:input message="tns:SubmitDataToProcessingSoapIn" />
+      <wsdl:output message="tns:SubmitDataToProcessingSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FenixSoapWebSvcSoap" type="tns:FenixSoapWebSvcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TSubmitDataToProcessing">
+      <soap:operation soapAction="http://www.upc.cz/fenixSoapWS/TSubmitDataToProcessing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitDataToProcessing">
+      <soap:operation soapAction="http://www.upc.cz/fenixSoapWS/SubmitDataToProcessing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FenixSoapWebSvcSoap12" type="tns:FenixSoapWebSvcSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TSubmitDataToProcessing">
+      <soap12:operation soapAction="http://www.upc.cz/fenixSoapWS/TSubmitDataToProcessing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitDataToProcessing">
+      <soap12:operation soapAction="http://www.upc.cz/fenixSoapWS/SubmitDataToProcessing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FenixSoapWebSvc">
+    <wsdl:port name="FenixSoapWebSvcSoap" binding="tns:FenixSoapWebSvcSoap">
+      <soap:address location="http://localhost:49960/FenixSoapWebSvc.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FenixSoapWebSvcSoap12" binding="tns:FenixSoapWebSvcSoap12">
+      <soap12:address location="http://localhost:49960/FenixSoapWebSvc.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
