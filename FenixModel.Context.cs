@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FenixControl
+namespace Fenix
 {
     using System;
     using System.Data.Entity;

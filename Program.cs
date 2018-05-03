@@ -1,21 +1,14 @@
 ﻿using System;
-using FenixControl.Error;
-using FenixControl.Loggers;
 
-namespace FenixControl
+namespace Fenix
 {
-	class Program
+    class Program
 	{
-		private enum ApplicationMode
-		{
-			Run = 1,
-			ExecutiveProhibited = 2,
-			SelfTest = 3
-		}
+		
 
 		static void Main(string[] args)
 		{
-			switch (BC.ApplicationMode)
+			switch (Bc.ApplicationMode)
 			{
 				case (int)ApplicationMode.Run:
 					Logger.WriteIntoLoggers(String.Empty, FileLogger.PrepareMsg("Fenix Control spuštěn..."), String.Empty);
@@ -30,7 +23,7 @@ namespace FenixControl
 
 				case (int)ApplicationMode.SelfTest:					
 					Logger.WriteIntoLoggers(String.Empty, FileLogger.PrepareMsg("Fenix Control self test"), String.Empty);
-					BC.SelfTest();
+					Bc.SelfTest();
 					break;
 					
 				default:

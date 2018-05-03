@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FenixControl.Sender
+namespace Fenix
 {
+    /// <summary>
+    /// Třída sloužící k odeslání emailů
+    /// </summary>
 	public class EmailSender
 	{
 		/// <summary>Odeslání mailu.</summary>
@@ -93,10 +93,10 @@ namespace FenixControl.Sender
 			try
 			{
 
-				string mailServer = BC.MailServer;
+				string mailServer = Bc.MailServer;
 				if (String.IsNullOrWhiteSpace(mailServer) == false)
 				{
-					using (MailMessage mailMsg = new MailMessage(new MailAddress(BC.MailFrom), mailsTo[0]))
+					using (MailMessage mailMsg = new MailMessage(new MailAddress(Bc.MailFrom), mailsTo[0]))
 					{
 						for (int i = 1; i < mailsTo.Count; i++)
 						{

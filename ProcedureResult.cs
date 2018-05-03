@@ -1,38 +1,31 @@
 ﻿using System.Runtime.Serialization;
 
-namespace FenixControl
+namespace Fenix
 {
 	/// <summary>Výsledek akce procedury.</summary>
-	[DataContract(Namespace = BC.APP_NAMESPACE)]
+	[DataContract(Namespace = Bc.AppNamespace)]
 	public class ProcedureResult
 	{
-		/// <summary></summary>
+		/// <summary>Chyba</summary>
 		[DataMember]
 		public string Error { set; get; }
-		[DataMember]
 
-		/// <summary></summary>
+        /// <summary>
+        /// Identita
+        /// </summary>
+		[DataMember]
 		public string Identity { set; get; }
-		[DataMember]
 
-		/// <summary></summary>
+        /// <summary>
+        /// Duplicita
+        /// </summary>
+		[DataMember]
 		public string Duplicity { set; get; }
-		[DataMember]
 
-		/// <summary></summary>
+        /// <summary>
+        /// Popis statusu
+        /// </summary>
+		[DataMember]
 		public string StatusDesc { set; get; }
-	}
-
-	/// <summary>Výsledek akce procedury.</summary>
-	[DataContract(Namespace = BC.APP_NAMESPACE)]
-	public class ProcResult
-	{
-		/// <summary></summary>
-		[DataMember(IsRequired = true)]
-		public int ReturnValue { set; get; }
-
-		/// <summary></summary>
-		[DataMember]
-		public string ReturnMessage { set; get; }
 	}
 }

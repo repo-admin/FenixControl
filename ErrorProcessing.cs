@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UPC.Extensions.Convert;
-using FenixHelper;
-using FenixControl.Loggers;
-using FenixControl.Sender;
 
-namespace FenixControl.Error
+namespace Fenix
 {
 	/// <summary>
-	/// Zpracování chyby
+	/// Třída sloužící ke zpracování chyby
 	/// </summary>
 	public class ErrorProcessing
 	{
@@ -37,15 +27,15 @@ namespace FenixControl.Error
 		}
 
 		/// <summary>
-		/// uložení chyby do logu
+		/// Uložení chyby do logu
 		/// <para>odeslání chyby emailem</para>
 		/// <para>odeslání chyby SMS zprávou</para>		
 		/// </summary>
 		public void DoProcess()
 		{
 			Logger.WriteIntoLoggers(String.Empty, FileLogger.PrepareMsg(this.ErrorMessage), String.Empty);			
-			EmailSender.SendMail(BC.EMAIL_SUBJECT_ERROR, this.ErrorMessage, false, BC.MailTo, "", "");
-			SmsSender.SendSMS(BC.PhoneNumber, this.ErrorMessage);
+			EmailSender.SendMail(Bc.EmailSubjectError, this.ErrorMessage, false, Bc.MailTo, "", "");
+			SmsSender.SendSMS(Bc.PhoneNumber, this.ErrorMessage);
 		}
 	}
 }

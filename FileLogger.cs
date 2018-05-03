@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Text;
 
-namespace FenixControl.Loggers
+namespace Fenix
 {
 	/// <summary>
 	/// Logování (do souboru na disku)
 	/// </summary>
 	public class FileLogger
 	{
-		#region Public Methods
+        #region Public Methods
 
-		/// <summary>zápis do LOG souboru.</summary>
-		/// <param name="logFile">úplné jméno LOG souboru</param>
-		/// <param name="msg">text zprávy</param>
-		public static void WriteToLog(string logFile, string msg)
+        /// <summary>Zápis do log souboru.</summary>
+        /// <param name="logFile">Cesta k log souboru</param>
+        /// <param name="msg">Textová hodnota logovací zprávy</param>
+        public static void WriteToLog(string logFile, string msg)
 		{
 			System.IO.StreamWriter wr = null;
 			try
@@ -31,9 +31,9 @@ namespace FenixControl.Loggers
 		}
 
 		/// <summary>
-		/// příprava zprávy (je rozšířena o datum a čas)
+		/// Příprava zprávy (je rozšířena o datum a čas)
 		/// </summary>
-		/// <param name="message"></param>
+		/// <param name="message">Textová hodnota logovací zprávy</param>
 		/// <returns></returns>
 		public static string PrepareMsg(string message)
 		{ 
@@ -42,9 +42,9 @@ namespace FenixControl.Loggers
 		}
 
 		/// <summary>
-		/// smazání LOG souboru pokud přesáhne definovanou velikost
+		/// Smazání log souboru, pokud přesáhne definovanou velikost
 		/// </summary>
-		/// <param name="logFile"></param>
+		/// <param name="logFile">Cesta k souboru</param>
 		public static void DeleteLogFile(string logFile)
 		{
 			// odstranění LOGu, je-li větší než 100 MB

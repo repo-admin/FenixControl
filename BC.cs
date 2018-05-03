@@ -1,109 +1,150 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
-using System.Reflection;
-using FenixControl.Loggers;
-using FenixControl.Sender;
+using System.IO;
+using Fenix.FenixSoapService;
 
-namespace FenixControl
+namespace Fenix
 {
-	internal class BC
+    /// <summary>
+    /// Třída obsahující konstanty anebo hodnoty z app config souboru
+    /// </summary>
+	internal class Bc
 	{
-		internal const string APP_NAMESPACE = "FenixControl";
+        /// <summary>
+        /// Jmenný prostor aplikace
+        /// </summary>
+		internal const string AppNamespace = "Fenix";
 
-		internal const string EMAIL_SUBJECT = "Fenix Control";
+        /// <summary>
+        /// Předmět (defaultní) emailové zprávy
+        /// </summary>
+		internal const string EmailSubject = "Fenix Control";
 
-		internal const string EMAIL_SUBJECT_ERROR = "Fenix Control Error";
+        /// <summary>
+        /// Předmět (chybové) emailové zprávy
+        /// </summary>
+		internal const string EmailSubjectError = "Fenix Control Error";
 
-		internal const string SMS_SENDER = "Rezler";
+        /// <summary>
+        /// Název odesílatele
+        /// </summary>
+		internal const string SmsSender = "Rezler";
 
-		internal const string SMS_SENDER_ID = "1084";
+        /// <summary>
+        /// Id odesílatele
+        /// </summary>
+		internal const string SmsSenderId = "1084";
 
 		/// <summary>
-		/// OK
+		/// Hodnota odpovědi - 'OK'
 		/// <value>0</value>
 		/// </summary>
-		internal const int OK = 0;
+		internal const int Ok = 0;
 
-		/// <summary>
-		/// Not OK
-		/// <value>-1</value>
-		/// </summary>
-		internal const int NOT_OK = -1;
+        /// <summary>
+        /// Hodnota odpovědi - 'NOT OK'
+        /// <value>-1</value>
+        /// </summary>
+        internal const int NotOk = -1;
 
-		internal const string UNKNOWN = "Unknown";
-
-		private const string LOG_FILE = "FenixControl.log";
+	    /// <summary>
+        /// Název log souboru
+        /// </summary>
+		private const string LogFileName = "FenixControl.log";
 
 		#region Properties
 
+        /// <summary>
+        /// Systémová (úplná) cesta k log souboru
+        /// </summary>
 		internal static string LogFile
 		{			
 			get 
 			{
 				string assemblyPath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
-				return Path.Combine(assemblyPath, LOG_FILE); 
+				return Path.Combine(assemblyPath, LogFileName); 
 			}
 		}
 
+        /// <summary>
+        /// Vrací číselnou hodnotu <seealso cref="ApplicationMode"/> specifikovaného v konfiguračním souboru
+        /// </summary>
 		internal static int ApplicationMode
 		{
 			get { try { return int.Parse(ConfigurationManager.AppSettings["ApplicationMode"].Trim()); } catch { return 1; } }
 		}
 
-		internal static string MailServer
+        /// <summary>
+        /// Vrací název mail serveru specifikovaného v konfiguračním souboru, anebo defaultní hodnotu 'relay.upc.cz'
+        /// </summary>
+        internal static string MailServer
 		{
 			get { try { return ConfigurationManager.AppSettings["MailServer"].Trim(); } catch { return "relay.upc.cz"; } }
 		}
 
-		internal static string MailFrom
+        /// <summary>
+        /// Vrací jméno odesílatele specifikovaného v konfiguračním souboru, anebo defaultní hodnotu 'control.fenix@upc.cz'
+        /// </summary>
+        internal static string MailFrom
 		{
 			get { try { return ConfigurationManager.AppSettings["MailFrom"].Trim(); } catch { return "control.fenix@upc.cz"; } }
 		}
 
+        /// <summary>
+        /// Vrací jméno příjemce specifikovaného v konfiguračním souboru, anebo defaultní hodnotu 'michal.rezler@upc.cz'
+        /// </summary>
 		internal static string MailTo
 		{
 			get { try { return ConfigurationManager.AppSettings["MailTo"].Trim(); } catch { return "michal.rezler@upc.cz"; } }
 		}
 
+        /// <summary>
+        /// Vrací jméno příjemce (pro test) specifikovaného v konfiguračním souboru, anebo defaultní hodnotu 'michal.rezler@upc.cz'
+        /// </summary>
 		internal static string MailSelfTest
 		{
 			get { try { return ConfigurationManager.AppSettings["MailSelfTest"].Trim(); } catch { return "michal.rezler@upc.cz"; } }
 		}
-				
-		internal static string PhoneNumber
+
+        /// <summary>
+        /// Vrací mobilní číslo pro příjem sms specifikovaného v konfiguračním souboru, anebo defaultní hodnotu '778489631'
+        /// </summary>
+        internal static string PhoneNumber
 		{
 			get { try { return ConfigurationManager.AppSettings["PhoneNumber"].Trim(); } catch { return "778489631"; } }
 		}
 
+        /// <summary>
+        /// Vrací přihlašovací jméno pro volání metody <seealso cref="FenixSoapWebSvcSoapClient.SubmitDataToProcessing"/> specifikovaného
+        /// v konfiguračním souboru, anebo defaultní hodnotu 'admin'
+        /// </summary>
 		internal static string Login
 		{
 			get { try { return ConfigurationManager.AppSettings["Login"].Trim(); } catch { return "admin"; } }
 		}
 
+        /// <summary>
+        /// Vrací heslo pro volání metody <seealso cref="FenixSoapWebSvcSoapClient.SubmitDataToProcessing"/> specifikovaného
+        /// v konfiguračním souboru, anebo defaultní hodnotu 'Heslo*123'
+        /// </summary>
 		internal static string Password
 		{
 			get { try { return ConfigurationManager.AppSettings["Password"].Trim(); } catch { return "Heslo*123"; } }
 		}
-		                                                                                              
-		#endregion
 
-		/// <summary>
-		/// vytvoří chybový ProcResult
-		/// </summary>
-		/// <param name="methodName"></param>
-		/// <param name="ex"></param>
-		/// <returns></returns>
-		internal static ProcResult CreateErrorResult(string methodName, Exception ex)
+        #endregion
+
+        /// <summary>
+        /// Vytvoří chybový <seealso cref="ProcResult"/>
+        /// </summary>
+        /// <param name="methodName"></param>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        internal static ProcResult CreateErrorResult(string methodName, Exception ex)
 		{
 			ProcResult result = new ProcResult();
 
-			result.ReturnValue = BC.NOT_OK;
+			result.ReturnValue = Bc.NotOk;
 			result.ReturnMessage = String.Format("{0}{1}{2}", methodName, Environment.NewLine, ex.Message);
 
 			if (ex.InnerException != null)
@@ -113,7 +154,7 @@ namespace FenixControl
 		}
 
 		/// <summary>
-		/// vytvoří chybové hlášení
+		/// Vytvoří chybové hlášení
 		/// </summary>
 		/// <param name="methodName"></param>
 		/// <param name="exception"></param>
@@ -128,19 +169,19 @@ namespace FenixControl
 		}
 
 		/// <summary>
-		/// 
+		/// Provede self test odeslání emailu
 		/// </summary>
 		internal static void SelfTest()
 		{
 			try
 			{
 				string message = "Self test";
-				EmailSender.SendMail(BC.EMAIL_SUBJECT, message, false, BC.MailSelfTest, "", "");
-				SmsSender.SendSMS(BC.PhoneNumber, message);
+				EmailSender.SendMail(Bc.EmailSubject, message, false, Bc.MailSelfTest, "", "");
+				Fenix.SmsSender.SendSMS(Bc.PhoneNumber, message);
 			}
 			catch (Exception ex)
 			{
-				ProcResult result = BC.CreateErrorResult(FenixHelper.AppLog.GetMethodName(), ex);
+				ProcResult result = Bc.CreateErrorResult(AppLog.GetMethodName(), ex);
 				Logger.WriteIntoLoggers(String.Empty, result.ReturnMessage, String.Empty);				
 			}
 		}

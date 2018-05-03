@@ -1,23 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.SqlClient;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using UPC.Extensions.Convert;
-using FenixHelper;
-using FenixControl.Error;
-using FenixControl.FenixSoapService;
+using Fenix.FenixSoapService;
 
-namespace FenixControl
+namespace Fenix
 {
 	/// <summary>
-	/// Třída pro čtení statusu 
-	/// (ověřuje se: FenixSoapService, FenixAppService, FenixAutomat a databáze)
+	/// Třída pro čtení statusu (ověřuje se: FenixSoapService, FenixAppService, FenixAutomat a databáze)
 	/// </summary>
 	public class FenixStatusReader
 	{
+        /// <summary>
+        /// Vrací instanci <seealso cref="ErrorProcessing"/>
+        /// </summary>
 		private static ErrorProcessing ErrProcessing { get; set; }
 
 		/// <summary>
@@ -29,7 +23,7 @@ namespace FenixControl
 		}
 
 		/// <summary>
-		/// přečte a vyhodnotí status
+		/// Přečte a vyhodnotí status
 		/// </summary>
 		public void ReadAndEvaluateStatus()
 		{
@@ -40,17 +34,17 @@ namespace FenixControl
 				byte[] byteU8 = Encoding.UTF8.GetBytes("Jen proto, aby se do volani metody na serveru nepredavala null hotnota.");
 
 				FenixSoapWebSvcSoapClient client = new FenixSoapWebSvcSoapClient("FenixSoapWebSvcSoap");
-				processingResult = client.SubmitDataToProcessing(BC.Login, BC.Password, Environment.MachineName, "GetServicesStatuses", byteU8, "UTF-8");
+				processingResult = client.SubmitDataToProcessing(Bc.Login, Bc.Password, Environment.MachineName, "GetServicesStatuses", byteU8, "UTF-8");
 				
-				if (processingResult.MessageNumber != BC.OK)
+				if (processingResult.MessageNumber != Bc.Ok)
 				{
 					ErrProcessing.ErrorMessage = processingResult.Errors[0].ErrorMessage;
 					ErrProcessing.DoProcess();
 				}
 				else
 				{
-					ProcResult result = evaluateStatus(processingResult.MessageDescription);
-					if (result.ReturnValue != BC.OK)
+					ProcResult result = EvaluateStatus(processingResult.MessageDescription);
+					if (result.ReturnValue != Bc.Ok)
 					{
 						ErrProcessing.ErrorMessage = result.ReturnMessage;
 						ErrProcessing.DoProcess();
@@ -64,15 +58,15 @@ namespace FenixControl
 			}
 		}
 
-		/// <summary>
-		/// očekává se string 'Automat Rows : 1  |   DateTime : yyyy-mm-dd hh:mi:ss.mmm'
-		/// </summary>
-		/// <param name="activeSqlContent"></param>
-		/// <returns></returns>
-		private ProcResult evaluateStatus(string activeSqlContent)
+        /// <summary>
+        /// Vyhodnocení statusu
+        /// </summary>
+        /// <param name="activeSqlContent">Textová hodnota ve formátu 'Automat Rows : 1  |   DateTime : yyyy-mm-dd hh:mi:ss.mmm'</param>
+        /// <returns></returns>
+        private ProcResult EvaluateStatus(string activeSqlContent)
 		{
 			ProcResult result = new ProcResult();
-			result.ReturnValue = BC.NOT_OK;
+			result.ReturnValue = Bc.NotOk;
 
 			try
 			{				
@@ -93,11 +87,11 @@ namespace FenixControl
 					throw new Exception(String.Format("Nalezený počet záznamů je 0. Očekáván 1 záznam."));
 				}
 
-				result.ReturnValue = BC.OK;
+				result.ReturnValue = Bc.Ok;
 			}
 			catch (Exception ex)
 			{
-				result = BC.CreateErrorResult(FenixHelper.AppLog.GetMethodName(), ex);
+				result = Bc.CreateErrorResult(AppLog.GetMethodName(), ex);
 			}
 			
 			return result;

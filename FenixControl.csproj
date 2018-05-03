@@ -7,7 +7,7 @@
     <ProjectGuid>{89A17378-2A5A-4D66-B8A9-1AE295761E5D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FenixControl</RootNamespace>
+    <RootNamespace>Fenix</RootNamespace>
     <AssemblyName>FenixControl</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -59,8 +59,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BC.cs" />
-    <Compile Include="Error\ErrorProcessing.cs" />
+    <Compile Include="ApplicationMode.cs" />
+    <Compile Include="Bc.cs" />
+    <Compile Include="ErrorProcessing.cs" />
     <Compile Include="FenixModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,13 +78,14 @@
       <DependentUpon>FenixModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="FenixStatusReader.cs" />
-    <Compile Include="Loggers\FileLogger.cs" />
-    <Compile Include="Loggers\Logger.cs" />
+    <Compile Include="FileLogger.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="ProcedureResult.cs" />
+    <Compile Include="ProcResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sender\EmailSender.cs" />
-    <Compile Include="Sender\SmsSender.cs" />
+    <Compile Include="EmailSender.cs" />
+    <Compile Include="SmsSender.cs" />
     <Compile Include="Service References\FenixSoapService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -118,16 +120,16 @@
     </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
-    <None Include="Service References\FenixSoapService\FenixControl.FenixSoapService.SimpleResult.datasource">
+    <None Include="Service References\FenixSoapService\Fenix.FenixSoapService.SimpleResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FenixSoapService\FenixControl.FenixSoapService.SubmitDataToProcessingResponse.datasource">
+    <None Include="Service References\FenixSoapService\Fenix.FenixSoapService.SubmitDataToProcessingResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FenixSoapService\FenixControl.FenixSoapService.SubmitDataToProcessingResult.datasource">
+    <None Include="Service References\FenixSoapService\Fenix.FenixSoapService.SubmitDataToProcessingResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\FenixSoapService\FenixControl.FenixSoapService.TSubmitDataToProcessingResponse.datasource">
+    <None Include="Service References\FenixSoapService\Fenix.FenixSoapService.TSubmitDataToProcessingResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\FenixSoapService\FenixSoapWebSvc.wsdl" />
